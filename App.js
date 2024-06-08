@@ -24,29 +24,42 @@ function HomeScreen({ navigation }) {
       <View style={styles.section}>
         <Text style={styles.header}>Sobre a EducaBrawl</Text>
         <Text style={styles.paragraph}>
-          A EducaBrawl é mais do que uma livraria online; é um portal para o mundo da imaginação e conhecimento para o público jovem...
+        A EducaBrawl é mais do que uma livraria online; é um portal para o mundo da imaginação e conhecimento para o público jovem. Nosso catálogo é cuidadosamente selecionado para encantar e inspirar leitores de todas as idades, com um foco especial em crianças e adolescentes. Estamos comprometidos em nutrir a paixão pela leitura e pelo aprendizado contínuo, oferecendo títulos que desafiam, entretêm e educam. </Text>
+        <Text style={styles.paragraph}>
+
         </Text>
+        <Text style={styles.paragraph}>
+        Nossa missão é criar uma experiência de leitura que seja ao mesmo tempo educativa e divertida, incentivando os jovens a explorar novos mundos através dos livros. Com atividades interativas e conteúdo envolvente, a EducaBrawl se destaca como uma plataforma que transforma a leitura em uma aventura emocionante e gratificante.</Text>
+        <Text style={styles.paragraph}>
+          
+        </Text>
+        <Text style={styles.paragraph}>
+        Junte-se a nós na jornada para despertar a curiosidade e o amor pelos livros, enquanto apoiamos o desenvolvimento intelectual e criativo da próxima geração de leitores.</Text>
       </View>
       <View style={styles.section}>
-        <Text style={styles.header}>Eventos</Text>
-        <Text style={styles.paragraph}>
-          Promoção Relâmpago da Livraria Letras & Saberes 📚
-          Segunda Literária: Compre 1, leve outro com 50% de desconto em biografias...
-        </Text>
+        <Text style={styles.header}>Promoção Relâmpago da Livraria Letras & Saberes 📚</Text>
+        <View style={styles.list}>
+          <Text style={styles.item}>
+            <Text style={styles.bold}>Segunda Literária:</Text> Compre 1, leve outro com 50% de desconto em biografias.
+          </Text>
+          <Text style={styles.item}>
+            <Text style={styles.bold}>Quarta de Clássicos:</Text> 30% off em todos os clássicos literários.
+          </Text>
+          <Text style={styles.item}>
+            <Text style={styles.bold}>Sexta Fantástica:</Text> Fantasia e ficção científica com 20% de desconto.
+          </Text>
+          <Text style={styles.item}>
+            <Text style={styles.bold}>Fim de Semana Poético:</Text> Poesias com 25% de desconto.
+          </Text>
+          <Text style={styles.item}>
+            <Text style={styles.bold}>Todo mês:</Text> um autor em destaque com 40% de desconto em suas obras.
+          </Text>
+          <Text style={styles.item}>
+            <Text style={styles.bold}>Desconto Surpresa:</Text> A cada visita, um livro selecionado com 60% off!
+          </Text>
+        </View>
       </View>
     </ScrollView>
-  );
-}
-
-// About Screen Component
-function AboutScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Sobre a EducaBrawl</Text>
-      <Text style={styles.paragraph}>
-        A EducaBrawl é mais do que uma livraria online; é um portal para o mundo da imaginação e conhecimento para o público jovem...
-      </Text>
-    </View>
   );
 }
 
@@ -54,7 +67,6 @@ function AboutScreen() {
 function BibliotecaScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Biblioteca</Text>
       <Button title="Livros Kids" onPress={() => {LivrosKids}} />
       <Button title="Livros Teens" onPress={() => {LivrosTeens}} />
     </View>
@@ -68,43 +80,70 @@ const books = [
     year: '2020',
     price: 'R$ 25,00',
     image: require('./img/ContosFadas.png'),
-    description: 'Contos de Fadas é uma coletânea de histórias clássicas e encantadoras...'
+    description: 'Contos de Fadas é uma coletânea de histórias clássicas e encantadoras que fazem parte do imaginário popular há séculos. Reunindo contos como Cinderela, Branca de Neve, Chapeuzinho Vermelho e muitos outros, esta obra transporta os leitores para mundos mágicos habitados por princesas, bruxas, fadas madrinhas e criaturas fantásticas. Cada história é única em sua essência, apresentando lições de moral, aventuras emocionantes e finais felizes que cativam leitores de todas as idades. Contos de Fadas continua a ser uma fonte inesgotável de inspiração, ensinando-nos sobre coragem, amor, perseverança e a importância de acreditar nos nossos sonhos.'
   },
   {
     id: '2',
-    title: 'Aventuras na Floresta',
-    author: 'Maria Souza',
-    year: '2019',
+    title: 'O Sol é para Todos',
+    author: 'Harper Lee',
+    year: '1960',
     price: 'R$ 30,00',
-    image: require('./img/AventurasFloresta.png'),
-    description: 'Aventuras na Floresta leva os leitores para uma emocionante jornada...'
+    image: require('./img/OSol.png'),
+    description: 'Este livro é um clássico da literatura norte-americana, que aborda temas como racismo, injustiça e moralidade. A história se passa na década de 1930, no sul dos Estados Unidos, e é narrada pela pequena Scout Finch. Ela relata a jornada de seu pai, Atticus Finch, um advogado que defende um homem negro acusado injustamente de estuprar uma mulher branca. O livro oferece uma poderosa reflexão sobre a natureza humana, a tolerância e a luta pela justiça.'
   },
   {
     id: '3',
-    title: 'O Mundo das Cores',
-    author: 'Carlos Pereira',
-    year: '2018',
-    price: 'R$ 22,00',
-    image: require('./img/MundoCores.png'),
-    description: 'O Mundo das Cores é um livro educativo que explora a beleza das cores...'
+    title: 'Harry Potter e a Pedra Filosofal',
+    author: 'J.K. Rowling',
+    year: '1997',
+    price: 'R$ 25,00',
+    image: require('./img/HPotterPedra.png'),
+    description: 'Este é o primeiro livro da famosa série Harry Potter. Ele nos apresenta ao mundo mágico de Hogwarts e aos personagens inesquecíveis criados por J.K. Rowling. A história segue Harry Potter, um jovem bruxo que descobre sua verdadeira identidade no seu aniversário de onze anos. Ele é convidado a frequentar a Escola de Magia e Bruxaria de Hogwarts, onde enfrenta desafios emocionantes, faz amizades duradouras e descobre segredos sobre seu passado.'
   },
   {
     id: '4',
-    title: 'Histórias de Dormir',
-    author: 'Ana Lima',
-    year: '2021',
-    price: 'R$ 28,00',
-    image: require('./img/HistoriasDormir.png'),
-    description: 'Histórias de Dormir é uma coletânea de contos para embalar o sono das crianças...'
+    title: 'Harry Potter e a câmara secreta',
+    author: 'J.K. Rowling',
+    year: '1998',
+    price: 'R$ 30,00',
+    image: require('./img/CâmaraSecreta.png'),
+    description: 'Neste segundo livro da série Harry Potter, Harry retorna a Hogwarts para seu segundo ano letivo, onde descobre que a Câmara Secreta foi aberta, libertando um monstro que ameaça os alunos nascidos de trouxas. Junto com seus amigos Ron e Hermione, Harry investiga a origem da Câmara e enfrenta novos desafios enquanto tenta proteger a escola.'
   },
   {
     id: '5',
-    title: 'O Pequeno Cientista',
-    author: 'Roberto Almeida',
-    year: '2017',
+    title: 'Harry Potter e a Ordem da Fênix',
+    author: 'J.K. Rowling',
+    year: '2003',
+    price: 'R$ 45,00',
+    image: require('./img/OrdemFenix.png'),
+    description: 'No quinto livro da série Harry Potter, Harry retorna a Hogwarts para seu quinto ano e se depara com uma série de desafios. Ele lidera um grupo secreto de estudantes chamado Armada de Dumbledore para ensinar Defesa Contra as Artes das Trevas, enquanto enfrenta a resistência do Ministério da Magia, que se recusa a acreditar na volta de Lord Voldemort. A história culmina em uma batalha épica entre o bem e o mal.'
+  },
+  {
+    id: '6',
+    title: 'O Pequeno Príncipe',
+    author: 'Antoine de Saint-Exupéry',
+    year: '1943',
+    price: 'R$ 20,00',
+    image: require('./img/PequenoPrincipe.png'),
+    description: 'A história começa com um piloto perdido no deserto do Saara, onde ele encontra um pequeno príncipe que veio de um asteroide distante. O Pequeno Príncipe conta suas aventuras e encontros peculiares em sua jornada por diferentes planetas, cada um habitado por um personagem singular, como o Rei, o Vaidoso, o Bêbado e a Raposa. Ao longo do livro, são explorados temas profundos, como amizade, amor, solidão, e a importância de ver além das aparências. A história nos convida a refletir sobre a inocência da infância, a simplicidade da vida e os verdadeiros valores que muitas vezes são esquecidos na correria do mundo adulto.'
+  },
+  {
+    id: '7',
+    title: 'Entre Sonhos e dragões',
+    author: 'Adriana Carranca',
+    year: '2023',
     price: 'R$ 35,00',
-    image: require('./img/PequenoCientista.png'),
-    description: 'O Pequeno Cientista desperta a curiosidade das crianças com experimentos simples...'
+    image: require('./img/EntreSonhos.png'),
+    description: 'Entre Sonhos e dragões é uma obra da escritora Adriana Carranca que mergulha os leitores em uma aventura fantástica repleta de magia, amizade e superação. A história segue a jornada de um grupo de jovens protagonistas que descobrem a existência de um mundo paralelo habitado por seres mágicos, como dragões e fadas. Confrontados com desafios e perigos, os personagens precisam aprender a lidar com suas próprias habilidades especiais e a trabalhar em equipe para enfrentar as ameaças que surgem em seu caminho. Ao longo da narrativa, são explorados temas como amizade, coragem, autoconhecimento e a importância de acreditar nos próprios sonhos.'
+  },
+  {
+    id: '8',
+    title: 'Reinações de Narizinho',
+    author: 'Monteiro Lobato',
+    year: '1931',
+    price: 'R$ 22,00',
+    image: require('./img/Reinações.png'),
+    description: 'Reinações de Narizinho é uma obra clássica da literatura infantil brasileira escrita por Monteiro Lobato. A história se passa no Sítio do Picapau Amarelo, onde a menina Narizinho vive diversas aventuras ao lado de sua boneca Emília, do Visconde de Sabugosa, do Marquês de Rabicó e outros personagens encantadores. O livro é uma coletânea de contos que mesclam fantasia e realidade, levando os leitores a viagens emocionantes por terras distantes e mundos imaginários. Cada capítulo apresenta uma nova aventura, seja enfrentando bruxas malvadas, explorando tesouros escondidos ou fazendo amizade com seres mágicos.'
   },
   // Adicione outros livros aqui...
 ];
@@ -212,5 +251,16 @@ const styles = StyleSheet.create({
   paragraph: {
     fontSize: 16,
     lineHeight: 24,
+  },
+  list: {
+    marginBottom: 20,
+  },
+  item: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 10,
+  },
+  bold: {
+    fontWeight: 'bold',
   },
 });
