@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, FlatList, TouchableOpacity, Button } from 'react-native';
 
 // Home Screen Component
 function HomeScreen({ navigation }) {
@@ -11,13 +11,13 @@ function HomeScreen({ navigation }) {
       <View style={styles.carousel}>
         <Text style={styles.header}>Destaques</Text>
         <ScrollView horizontal pagingEnabled>
-          <TouchableOpacity style={styles.carouselItem} onPress={() => navigation.navigate('Destaques')}>
+          <TouchableOpacity style={styles.carouselItem} onPress={() => navigation.navigate('DestaquesScreen')}>
             <Image source={require('./img/PequenoPrincipe.png')} style={styles.carouselImage} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.carouselItem} onPress={() => navigation.navigate('Destaques')}>
+          <TouchableOpacity style={styles.carouselItem} onPress={() => navigation.navigate('DestaquesScreen')}>
             <Image source={require('./img/CâmaraSecreta.png')} style={styles.carouselImage} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.carouselItem} onPress={() => navigation.navigate('Destaques')}>
+          <TouchableOpacity style={styles.carouselItem} onPress={() => navigation.navigate('DestaquesScreen')}>
             <Image source={require('./img/EntreSonhos.png')} style={styles.carouselImage} />
           </TouchableOpacity>
         </ScrollView>
@@ -38,25 +38,25 @@ function HomeScreen({ navigation }) {
       </View>
       <View style={styles.section}>
         <Text style={styles.header}>Promoção Relâmpago da Livraria Letras & Saberes 📚</Text>
-          <Text style={styles.item}>
-            <Text style={styles.bold}>Segunda Literária:</Text> Compre 1, leve outro com 50% de desconto em biografias.
-          </Text>
-          <Text style={styles.item}>
-            <Text style={styles.bold}>Quarta de Clássicos:</Text> 30% off em todos os clássicos literários.
-          </Text>
-          <Text style={styles.item}>
-            <Text style={styles.bold}>Sexta Fantástica:</Text> Fantasia e ficção científica com 20% de desconto.
-          </Text>
-          <Text style={styles.item}>
-            <Text style={styles.bold}>Fim de Semana Poético:</Text> Poesias com 25% de desconto.
-          </Text>
-          <Text style={styles.item}>
-            <Text style={styles.bold}>Todo mês:</Text> um autor em destaque com 40% de desconto em suas obras.
-          </Text>
-          <Text style={styles.item}>
-            <Text style={styles.bold}>Desconto Surpresa:</Text> A cada visita, um livro selecionado com 60% off!
-          </Text>
-        </View>
+        <Text style={styles.item}>
+          <Text style={styles.bold}>Segunda Literária:</Text> Compre 1, leve outro com 50% de desconto em biografias.
+        </Text>
+        <Text style={styles.item}>
+          <Text style={styles.bold}>Quarta de Clássicos:</Text> 30% off em todos os clássicos literários.
+        </Text>
+        <Text style={styles.item}>
+          <Text style={styles.bold}>Sexta Fantástica:</Text> Fantasia e ficção científica com 20% de desconto.
+        </Text>
+        <Text style={styles.item}>
+          <Text style={styles.bold}>Fim de Semana Poético:</Text> Poesias com 25% de desconto.
+        </Text>
+        <Text style={styles.item}>
+          <Text style={styles.bold}>Todo mês:</Text> um autor em destaque com 40% de desconto em suas obras.
+        </Text>
+        <Text style={styles.item}>
+          <Text style={styles.bold}>Desconto Surpresa:</Text> A cada visita, um livro selecionado com 60% off!
+        </Text>
+      </View>
     </ScrollView>
   );
 }
@@ -126,7 +126,7 @@ function DestaquesScreen({ navigation }) {
 }
 
 // Book Details Screen Component
-function BookDetailsScreen({ route }) {
+function BookDetailsScreen({ route, navigation }) {
   const { book } = route.params;
 
   return (
@@ -137,15 +137,39 @@ function BookDetailsScreen({ route }) {
       <Text>{book.year}</Text>
       <Text>{book.price}</Text>
       <Text style={styles.paragraph}>{book.description}</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.buttonText}>Alugar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.buttonText}>Comprar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 // Vendas Screen Component
-function VendasScreen() {
+function VendasScreen({ navigation }) {
+  const renderProductItem = ({ item }) => (
+    <TouchableOpacity style={styles.productItem} onPress={() => alert(`Comprando ${item.name}`)}>
+      <Image source={item.image} style={styles.productImage} />
+      <View style={styles.productInfo}>
+        <Text style={styles.productTitle}>{item.name}</Text>
+        <Text>{item.description}</Text>
+        <Text>{item.price}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Vendas</Text>
+      <Text style={styles.header}>Produtos</Text>
+      <FlatList
+        data={products}
+        keyExtractor={item => item.id}
+        renderItem={renderProductItem}
+      />
     </View>
   );
 }
@@ -168,8 +192,7 @@ function MyDrawer() {
     <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen name="Tela Inicial" component={HomeScreen} />
       <Drawer.Screen name="Biblioteca" component={BibliotecaStack} />
-      <Drawer.Screen name="Destaques" component={DestaquesStack} />
-      <Drawer.Screen name="Vendas" component={VendasScreen} />
+      <Drawer.Screen name="Vendas" component={VendasStack} />
       <Drawer.Screen name="Login" component={LoginScreen} />
     </Drawer.Navigator>
   );
@@ -184,93 +207,53 @@ function BibliotecaStack() {
   );
 }
 
-function DestaquesStack() {
+function VendasStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="DestaquesScreen" component={DestaquesScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Detalhes do Livro" component={BookDetailsScreen} />
+      <Stack.Screen name="VendasScreen" component={VendasScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
 
-// Main App Component
-export default function App() {
+function MainStack() {
   return (
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={MyDrawer} options={{ headerShown: false }} />
+      <Stack.Screen name="DestaquesScreen" component={DestaquesScreen} options={{ headerShown: true }} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
+const products = [
+  {
+    id: '1',
+    name: 'Boné',
+    description: 'Boné com logo do brawl',
+    price: 'R$ 20,00',
+    image: require('./img/boné.png'),
   },
-  carousel: {
-    marginBottom: 20,
+  {
+    id: '2',
+    name: 'Camisa',
+    description: 'Camisa com estampa do brawl',
+    price: 'R$ 30,00',
+    image: require('./img/camisa.png'),
   },
-  carouselItem: {
-    width: 300,
-    height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000',
-    borderRadius: 10,
-    marginHorizontal: 10,
+  {
+    id: '3',
+    name: 'Bermuda',
+    description: 'Bermuda',
+    price: 'R$ 25,00',
+    image: require('./img/bermuda.png'),
   },
-  carouselImage: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
+  {
+    id: '4',
+    name: 'Moletom',
+    description: 'Moletom do spike',
+    price: 'R$ 50,00',
+    image: require('./img/moletom.png'),
   },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  paragraph: {
-    fontSize: 16,
-    lineHeight: 24,
-    marginBottom: 10,
-  },
-  list: {
-    paddingLeft: 20,
-  },
-  item: {
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  bold: {
-    fontWeight: 'bold',
-  },
-  bookItem: {
-    flexDirection: 'row',
-    marginBottom: 20,
-  },
-  bookImage: {
-    width: 100,
-    height: 150,
-    marginRight: 10,
-  },
-  bookInfo: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  bookTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  detailImage: {
-    width: '100%',
-    height: 300,
-    marginBottom: 20,
-  },
-});
+];
 
 // Dummy Data
 const books = [
@@ -347,3 +330,107 @@ const books = [
     description: 'Reinações de Narizinho é uma obra clássica da literatura infantil brasileira escrita por Monteiro Lobato. A história se passa no Sítio do Picapau Amarelo, onde a menina Narizinho vive diversas aventuras ao lado de sua boneca Emília, do Visconde de Sabugosa, do Marquês de Rabicó e outros personagens encantadores. O livro é uma coletânea de contos que mesclam fantasia e realidade, levando os leitores a viagens emocionantes por terras distantes e mundos imaginários. Cada capítulo apresenta uma nova aventura, seja enfrentando bruxas malvadas, explorando tesouros escondidos ou fazendo amizade com seres mágicos.'
   },
 ];
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MainStack />
+    </NavigationContainer>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  carousel: {
+    height: 200,
+    marginBottom: 20,
+  },
+  carouselItem: {
+    width: 300,
+    height: 200,
+    marginRight: 10,
+  },
+  carouselImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  paragraph: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  item: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  bold: {
+    fontWeight: 'bold',
+  },
+  bookItem: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 5,
+  },
+  bookImage: {
+    width: 50,
+    height: 75,
+    marginRight: 10,
+  },
+  bookInfo: {
+    justifyContent: 'center',
+  },
+  bookTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  detailImage: {
+    width: '100%',
+    height: 300,
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+  productItem: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 5,
+  },
+  productImage: {
+    width: 50,
+    height: 75,
+    marginRight: 10,
+  },
+  productInfo: {
+    justifyContent: 'center',
+  },
+  productTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
