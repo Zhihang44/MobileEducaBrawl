@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -245,19 +245,43 @@ function VendasScreen() {
       <Text style={styles.header}>Produtos</Text>
       <FlatList
         data={products}
-        renderItem={({ item }) => (
-          <View style={styles.productItem}>
-            <Image source={item.image} style={styles.productImage} />
-            <View style={styles.productDetails}>
-              <Text style={styles.productName}>{item.name}</Text>
-              <Text style={styles.productDescription}>{item.description}</Text>
-              <Text style={styles.productPrice}>{item.price}</Text>
-              <Button title="Comprar" onPress={() => {}} />
-            </View>
-          </View>
-        )}
+        renderItem={({ item }) => <ProductItem item={item} />}
         keyExtractor={item => item.id}
       />
+    </View>
+  );
+}
+function ProductItem({ item }) {
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  return (
+    <View style={styles.productItem}>
+      <Image source={item.image} style={styles.productImage} />
+      <View style={styles.productDetails}>
+        <Text style={styles.productName}>{item.name}</Text>
+        <Text style={styles.productDescription}>{item.description}</Text>
+        <Text style={styles.productPrice}>{item.price}</Text>
+        <View style={styles.quantityContainer}>
+          <TouchableOpacity onPress={decreaseQuantity} style={styles.quantityButton}>
+            <Text style={styles.quantityButtonText}>-</Text>
+          </TouchableOpacity>
+          <Text style={styles.quantityText}>{quantity}</Text>
+          <TouchableOpacity onPress={increaseQuantity} style={styles.quantityButton}>
+            <Text style={styles.quantityButtonText}>+</Text>
+          </TouchableOpacity>
+        </View>
+        <Button title="Comprar" onPress={() => {}} />
+      </View>
     </View>
   );
 }
@@ -309,7 +333,63 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  productItem: {
+    flexDirection: 'row',
+    marginBottom: 16,
+    padding: 16,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 8,
+  },
+  productImage: {
+    width: 100,
+    height: 100,
+    marginRight: 16,
+  },
+  productDetails: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  productName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  productDescription: {
+    fontSize: 14,
+    color: '#666',
+    marginVertical: 4,
+  },
+  productPrice: {
+    fontSize: 16,
+    color: '#000',
+    marginBottom: 8,
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  quantityButton: {
+    width: 32,
+    height: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+  },
+  quantityButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  quantityText: {
+    marginHorizontal: 16,
+    fontSize: 18,
+  },
     container: {
       flex: 1,
       justifyContent: 'center',
@@ -406,7 +486,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#d6d7c8',
     padding: 20,
   },
   carousel: {
