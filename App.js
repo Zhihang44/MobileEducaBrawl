@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, Image, ScrollView, FlatList, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, TextInput, Text, View, Image, ScrollView, FlatList, TouchableOpacity, Button } from 'react-native';
 
 // Home Screen Component
 function HomeScreen({ navigation }) {
@@ -149,20 +149,117 @@ function BookDetailsScreen({ route, navigation }) {
   );
 }
 
-// Vendas Screen Component
-function VendasScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Vendas</Text>
-    </View>
-  );
-}
-
 // Login Screen Component
-function LoginScreen() {
+const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Login</Text>
+      <View style={styles.form}>
+        <View style={styles.formGroup}>
+          <Text>Email:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Insira o email"
+          />
+        </View>
+        <View style={styles.formGroup}>
+          <Text>Senha:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Insira a senha"
+            secureTextEntry={true}
+          />
+        </View>
+        <View style={styles.buttonGroup}>
+          <TouchableOpacity style={[styles.button, styles.alunoButton]} onPress={() => navigation.navigate('Perfil do Aluno')}>
+            <Text style={styles.buttonText}>Aluno</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.professorButton]} onPress={() => { /* lógica para professor */ }}>
+            <Text style={styles.buttonText}>Professor</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+function StudentProfileScreen({ navigation }) {
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.header}>Perfil do Aluno</Text>
+      <View style={styles.row}>
+        <View style={styles.infoBox}>
+          <Image source={require('./img/Criança.jpg')} style={styles.image} />
+        </View>
+        <View style={styles.infoBox}>
+          <Text style={styles.infoText}>Nome: João Silva</Text>
+          <Text style={styles.infoText}>Nome do Responsável: Maria Silva</Text>
+          <Text style={styles.infoText}>Email do Responsável: maria@example.com</Text>
+          <Text style={styles.infoText}>Email do Aluno: joao@example.com</Text>
+          <Text style={styles.infoText}>Número do Responsável: (11) 98765-4321</Text>
+          <Text style={styles.infoText}>Endereço: Rua ABC, 123</Text>
+          <Text style={styles.infoText}>CEP: 12345-678</Text>
+          <Text style={styles.infoText}>Série: 7º ano</Text>
+          <Text style={styles.infoText}>Cursos que está fazendo: Matemática, Música</Text>
+          <Text style={styles.infoText}>Idade: 13 anos</Text>
+          <Button title="Editar" onPress={() => {}} color="#007bff" />
+          <Button title="Logout" onPress={() => navigation.navigate('Home')} color="#dc3545" />
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+// Componente para o perfil do professor
+const ProfessorProfile = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Perfil do Professor</Text>
+      <View style={styles.profileContainer}>
+        <View style={styles.profileInfo}>
+          <Image source={require('./img/Mozart.jpg')} style={styles.image} />
+          <Text>Nome: Wolfgang Amadeus Mozart</Text>
+          <Text>Endereço: Av. XYZ, 456</Text>
+          <Text>CEP: 98765-432</Text>
+          {/* Adicione mais informações conforme necessário */}
+        </View>
+        <View style={styles.buttonGroup}>
+          <TouchableOpacity style={[styles.button, styles.editButton]}>
+            <Text style={styles.buttonText}>Editar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+
+
+const products = [
+  { id: '1', image: require('./img/boné.png'), name: 'Boné', description: 'Boné com logo do brawl', price: 'R$ 20,00' },
+  { id: '2', image: require('./img/camisa.png'), name: 'Camisa', description: 'Camisa com estampa do brawl', price: 'R$ 30,00' },
+  { id: '3', image: require('./img/bermuda.png'), name: 'Bermuda', description: 'Bermuda', price: 'R$ 25,00' },
+  { id: '4', image: require('./img/moletom.png'), name: 'Moletom', description: 'Moletom do spike', price: 'R$ 50,00' },
+];
+function VendasScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Produtos</Text>
+      <FlatList
+        data={products}
+        renderItem={({ item }) => (
+          <View style={styles.productItem}>
+            <Image source={item.image} style={styles.productImage} />
+            <View style={styles.productDetails}>
+              <Text style={styles.productName}>{item.name}</Text>
+              <Text style={styles.productDescription}>{item.description}</Text>
+              <Text style={styles.productPrice}>{item.price}</Text>
+              <Button title="Comprar" onPress={() => {}} />
+            </View>
+          </View>
+        )}
+        keyExtractor={item => item.id}
+      />
     </View>
   );
 }
@@ -197,9 +294,11 @@ function MainStack() {
       <Stack.Screen name="Home" component={MyDrawer} options={{ headerShown: false }} />
       <Stack.Screen name="DestaquesScreen" component={DestaquesScreen} options={{ headerShown: true, title: 'Destaques', headerBackTitle: 'Tela Inicial' }} />
       <Stack.Screen name="Detalhes do Livro" component={BookDetailsScreen} />
+      <Stack.Screen name="Perfil do Aluno" component={StudentProfileScreen} options={{ headerShown: true, title: 'Perfil do Aluno' }} />
     </Stack.Navigator>
   );
 }
+
 
 // Main App Component
 export default function App() {
@@ -211,6 +310,101 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    header: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 20,
+    },
+    form: {
+      width: '80%',
+    },
+    formGroup: {
+      marginBottom: 15,
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: 'gray',
+      padding: 10,
+    },
+    buttonGroup: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    button: {
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 5,
+    },
+    alunoButton: {
+      backgroundColor: 'blue',
+    },
+    professorButton: {
+      backgroundColor: 'green',
+    },
+    buttonText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+    profileContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    profileInfo: {
+      marginRight: 20,
+    },
+    image: {
+      width: 100,
+      height: 100,
+      borderRadius: 50,
+      marginBottom: 10,
+    },
+  productItem: {
+    flexDirection: 'row',
+    marginBottom: 20,
+    padding: 10,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 5,
+  },
+  productImage: {
+    width: 80,
+    height: 80,
+    marginRight: 10,
+  },
+  productDetails: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  productName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  productDescription: {
+    fontSize: 14,
+    marginBottom: 5,
+  },
+  profileContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  profileInfo: {
+    marginLeft: 20,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+  productPrice: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
