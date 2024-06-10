@@ -174,7 +174,7 @@ const LoginScreen = ({ navigation }) => {
           <TouchableOpacity style={[styles.button, styles.alunoButton]} onPress={() => navigation.navigate('Perfil do Aluno')}>
             <Text style={styles.buttonText}>Aluno</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.professorButton]} onPress={() => { /* lógica para professor */ }}>
+          <TouchableOpacity style={[styles.button, styles.professorButton]} onPress={() => { navigation.navigate('Perfil do Professor')}}>
             <Text style={styles.buttonText}>Professor</Text>
           </TouchableOpacity>
         </View>
@@ -215,21 +215,19 @@ const ProfessorProfile = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Perfil do Professor</Text>
-      <View style={styles.profileContainer}>
-        <View style={styles.profileInfo}>
+        <View style={styles.infoBox}>
           <Image source={require('./img/Mozart.jpg')} style={styles.image} />
           <Text>Nome: Wolfgang Amadeus Mozart</Text>
           <Text>Endereço: Av. XYZ, 456</Text>
           <Text>CEP: 98765-432</Text>
-          {/* Adicione mais informações conforme necessário */}
-        </View>
-        <View style={styles.buttonGroup}>
-          <TouchableOpacity style={[styles.button, styles.editButton]}>
-            <Text style={styles.buttonText}>Editar</Text>
-          </TouchableOpacity>
+          <Text>Matéria que leciona: Música</Text>
+          <Text>Instumento: Piano</Text>
+          <Text>Idade: 35 anos</Text>
+          <Text>Formação: Licenciatura em Música</Text>
+          <Button title="Editar" onPress={() => {}} color="#007bff" />
+          <Button title="Logout" onPress={() => navigation.navigate('Home')} color="#dc3545" />
         </View>
       </View>
-    </View>
   );
 };
 
@@ -295,6 +293,7 @@ function MainStack() {
       <Stack.Screen name="DestaquesScreen" component={DestaquesScreen} options={{ headerShown: true, title: 'Destaques', headerBackTitle: 'Tela Inicial' }} />
       <Stack.Screen name="Detalhes do Livro" component={BookDetailsScreen} />
       <Stack.Screen name="Perfil do Aluno" component={StudentProfileScreen} options={{ headerShown: true, title: 'Perfil do Aluno' }} />
+      <Stack.Screen name="Perfil do Professor" component={ProfessorProfile} options={{ headerShown: true, title: 'Perfil do Professor' }} />
     </Stack.Navigator>
   );
 }
