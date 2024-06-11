@@ -19,12 +19,12 @@ Sua sessão de login para que se mantenha registrado conosco sendo você um alun
 -Text\
 -Carousel\
 -Drawer
+# Fluxograma
+![Alt text](./Fluxograma/Fluxograma.png)
 # Integrates do grupo
 Vinicius Cavalcante\
 Zhihang Lin\
 José Fernando
-# Fluxograma
-![Alt text](./Fluxograma/Fluxograma.png)
 # Slide
 [Link para o Slide](./Slide/Mobile.pdf)
 
