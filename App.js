@@ -217,13 +217,22 @@ const ProfessorProfile = () => {
       <Text style={styles.header}>Perfil do Professor</Text>
         <View style={styles.infoBox}>
           <Image source={require('./img/Mozart.jpg')} style={styles.image} />
-          <Text>Nome: Wolfgang Amadeus Mozart</Text>
-          <Text>Endereço: Av. XYZ, 456</Text>
-          <Text>CEP: 98765-432</Text>
-          <Text>Matéria que leciona: Música</Text>
-          <Text>Instumento: Piano</Text>
-          <Text>Idade: 35 anos</Text>
-          <Text>Formação: Licenciatura em Música</Text>
+          <Text style={styles.infoText}>Nome: Wolfgang Amadeus Mozart</Text>
+              <Text style={styles.infoText}>Endereço: Av. XYZ, 456</Text>
+              <Text style={styles.infoText}>CEP: 98765-432</Text>
+              <Text style={styles.infoText}>Matéria que leciona: Música</Text>
+              <Text style={styles.infoText}>Instrumento: Piano</Text>
+              <Text style={styles.infoText}>Idade: 35 anos</Text>
+              <Text style={styles.infoText}>Formação: Licenciatura em Música</Text>
+              <Text style={styles.paragraph}></Text>
+              <Text style={styles.bold}>Composições mais famosas:</Text>
+              <Text style={styles.infoText}>- Sonata em Lá Maior K331</Text>
+              <Text style={styles.infoText}>- Missa da Coroação K.317</Text>
+              <Text style={styles.infoText}>- Idomeneo</Text>
+              <Text style={styles.infoText}>- Concerto Para Piano K.466</Text>
+              <Text style={styles.infoText}>- As Bodas de Fígaro</Text>
+              <Text style={styles.infoText}>- Dom Giovanni</Text>
+              <Text style={styles.infoText}>- Alla Turca</Text>
           <Button title="Editar" onPress={() => {}} color="#007bff" />
           <Button title="Logout" onPress={() => navigation.navigate('Home')} color="#dc3545" />
         </View>
@@ -280,7 +289,11 @@ function ProductItem({ item }) {
             <Text style={styles.quantityButtonText}>+</Text>
           </TouchableOpacity>
         </View>
-        <Button title="Comprar" onPress={() => {}} />
+        <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => {}}>
+          <Text style={styles.buttonText}>Comprar</Text>
+        </TouchableOpacity>
+      </View>
       </View>
     </View>
   );
