@@ -23,3 +23,6 @@ Sua sessão de login para que se mantenha registrado conosco sendo você um alun
 Vinicius Cavalcante\
 Zhihang Lin\
 José Fernando
+# Fluxograma
+![Alt text](./Fluxograma/Fluxograma.png)
+
