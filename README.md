@@ -26,5 +26,5 @@ José Fernando
 # Fluxograma
 ![Alt text](./Fluxograma/Fluxograma.png)
 # Slide
-[Descrição do link](./Slide/Mobile.pdf)
+[Link para o Slide](./Slide/Mobile.pdf)
 
