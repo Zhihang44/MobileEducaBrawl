@@ -8,3 +8,14 @@ Em nossa biblioteca dividimos a parte de cima com a nossa sessão infantil e a d
 Em nossas vendas temos o nosso material escolar para que seus dias na escola fiquem cada vez mais divertido e todos customizado com o jogo BrawlStars
 # Login
 Sua sessão de login para que se mantenha registrado conosco sendo você um aluno ou professor
+# Componentes utilizado
+TextInput
+Touchable Opacity
+Buttom
+View
+ScrollView
+Image
+Flat List
+Text
+Carousel
+Drawer
