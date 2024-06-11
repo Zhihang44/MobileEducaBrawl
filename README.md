@@ -19,3 +19,7 @@ Sua sessão de login para que se mantenha registrado conosco sendo você um alun
 -Text\
 -Carousel
 -Drawer
+# Integrates do grupo
+Vinicius Cavalcante\
+Zhihang Lin\
+José Fernando
