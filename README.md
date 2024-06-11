@@ -10,12 +10,12 @@ Em nossas vendas temos o nosso material escolar para que seus dias na escola fiq
 Sua sessão de login para que se mantenha registrado conosco sendo você um aluno ou professor
 # Componentes utilizado
 -TextInput\
--Touchable Opacity
--Buttom
--View
--ScrollView
--Image
--Flat List
--Text
+-Touchable Opacity\
+-Buttom\
+-View\
+-ScrollView\
+-Image\
+-Flat List\
+-Text\
 -Carousel
 -Drawer
