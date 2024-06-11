@@ -17,8 +17,7 @@ Sua sessão de login para que se mantenha registrado conosco sendo você um alun
 -Image\
 -Flat List\
 -Text\
--Carousel
-
+-Carousel\
 -Drawer
 # Integrates do grupo
 Vinicius Cavalcante\
